@@ -7,7 +7,7 @@ const icons = ["fa fa-diamond", "fa fa-bolt",
     "fa fa-bolt", "fa fa-leaf",
     "fa fa-cube", "fa fa-paper-plane-o",
     "fa fa-leaf", "fa fa-diamond",
-    "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb", "fa fa-anchor",
+    "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb",
 ];
 
 const cardsContainer = document.querySelector(".deck");
@@ -18,7 +18,10 @@ let matchedCards = [];
 // create the cards
 function init() {
 
-    for (let i = 0; i < icons.length; i++) {
+
+    
+
+        for (let i = 0; i < icons.length; i++) {
 
         const card = document.createElement("li");
         card.classList.add("card");
@@ -26,7 +29,10 @@ function init() {
         cardsContainer.appendChild(card);
 
         click(card);
-    }
+    
+
+}
+
 
 }
 
@@ -142,7 +148,7 @@ function rating(){
      } else if ( moves > 25 ){
         starsContainer.innerHTML = ' <li><i class="fa fa-star"></i></li>';
 
-     } else {
+     } else  {
         starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>' ;
 
      }

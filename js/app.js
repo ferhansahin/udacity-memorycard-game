@@ -271,7 +271,11 @@ function  resetGame(){
     starsContainer.innerHTML =  star + star + star;
     totalSeconds = 0;
     timerContainer.innerHTML = totalSeconds;
-    stopTimer();
+
+    setTimeout(function wait(){
+        startTimer();
+    },1000);
+   
      firstClick = true;
      init();
 

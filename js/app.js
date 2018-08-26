@@ -175,7 +175,11 @@ function gameWon() {
     if(matchedCards.length == iconsList.length) {
         clearInterval(liveTimer);
         modal();
-  
+
+        let modalStars = document.querySelector('.modal-stars');
+        let star = starsContainer.innerHTML;
+        modalStars.innerHTML = `Stars : ${star}`;
+
         let modalMoves = document.querySelector('.modal-moves');
         modalMoves.innerHTML = `Moves : ${moves}`;
         const time = document.querySelector('.modal-time');
@@ -273,7 +277,7 @@ function  resetGame(){
     timerContainer.innerHTML = totalSeconds;
 
     stopTimer();
-    
+
      isFirstClick = true;
      init();
 

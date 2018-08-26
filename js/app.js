@@ -272,11 +272,9 @@ function  resetGame(){
     totalSeconds = 0;
     timerContainer.innerHTML = totalSeconds;
 
-    setTimeout(function wait(){
-        startTimer();
-    },1000);
-   
-     firstClick = true;
+    stopTimer();
+    
+     isFirstClick = true;
      init();
 
 }

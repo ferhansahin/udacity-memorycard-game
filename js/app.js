@@ -245,9 +245,11 @@ function calculateTime(totalSeconds) {
    seconds = totalTime % 60;
 }
 
-function stopTimer() {
-   clearInterval(incrementer);
-}
+    // Timer [Stop].
+    
+    function stopTimer() {
+        clearInterval(liveTimer);
+    }
 
 
 
@@ -265,16 +267,18 @@ restartBtn.addEventListener("click", function(){
 
 function  resetGame(){
 
-    cards.Container.innerHTML = '';
+    cardsContainer.innerHTML = '';
     matchedCards = [];
     moves = 0;
     openedCards = [];
     movesContainer.innerHTML = moves;
     starsContainer.innerHTML =  star + star + star;
     totalSeconds = 0;
-    timerContainers.innerHTML = totalSeconds;
+    timerContainer.innerHTML = totalSeconds;
     stopTimer();
-     firstClick = true;
+    isfirstClick = true;
+    
+    init();
   
 
 }

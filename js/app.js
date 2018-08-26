@@ -69,11 +69,7 @@ function shuffle(array) {
    return array;
 }
 
-// Start game
-function start() {
-    init();
-    click();
-  }
+
 
 
 // click card event
@@ -165,8 +161,10 @@ function addMove (){
  function gameOver() {
     if(moves >= 40) {
         alert ('Game Over');
-        restart();
-
+        
+        //stop the time
+        resetGame();
+        init();
    }
 }
 
@@ -266,10 +264,12 @@ function stopTimer() {
 * restart button
 */
 
-// Play again buttons
-restartBtn.addEventListener('click', function() {
-    restart();
-  });
+restartBtn.addEventListener("click", function(){
+    resetGame ();
+    
+    init();
+
+})
 
 
 
@@ -277,7 +277,7 @@ restartBtn.addEventListener('click', function() {
 
 function  resetGame(){
 
-    
+    cardsContainer.innerHTML = '';
     matchedCards = [];
     moves = 0;
     openedCards = [];
@@ -290,18 +290,6 @@ function  resetGame(){
     
 }
 
-// Restart function
-function restart() {
-
-    // Remove all cards
-   cardsContainer.innerHTML = '';
-  
-    // Reset Current Values
-    resetGame();
-  
-    // Start the game again
-    start();
-  }
 
 
-start();
+init();

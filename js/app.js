@@ -262,6 +262,7 @@ function calculateTime(totalSeconds) {
 restartBtn.addEventListener("click", function(){
    resetGame ();
    init();
+ 
 
 })
 
@@ -278,7 +279,7 @@ function  resetGame(){
     stopTimer();
     isfirstClick = true;
     
-    init();
+    
   
 
 }

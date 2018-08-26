@@ -151,12 +151,39 @@ h1 {
  * Media queries to play in all devices
  */
 
-@media screen and (max-width: 660px) {
+ @media screen and (max-width: 660px) {
     .deck {
       width:  330px;
       min-height: 336px;
       min-width: 330px;
       margin:  0 0 0 0;
     }
- 
-  }
+
+
+ /* Responsive */
+@media all and (min-width: 600px) {
+    .cards {
+      width: 500px; }
+      .cards li {
+        height: 100px;
+        line-height: 120px; }
+        .cards li i {
+          font-size: 30px; } }
+  @media all and (min-width: 750px) {
+    .game-container h1 {
+      font-size: 3.5rem; }
+    .game-container .features {
+      font-size: 2rem; }
+  
+    .cards {
+      width: 650px; }
+      .cards li {
+        height: 140px;
+        line-height: 160px; }
+        .cards li i {
+          font-size: 40px; } }
+  @media all and (min-width: 1000px) {
+    .cards li {
+      height: 140px;
+      line-height: 160px; } }
+ }

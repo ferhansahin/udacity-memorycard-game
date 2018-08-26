@@ -13,15 +13,13 @@ rateHTML = '';
 const movesContainer = document.querySelector(".moves");
 movesContainer.innerHTML = 0;
 const timerContainer = document.querySelector(".timer")
-let incrementer, totalSeconds = 0;
+let liveTimer, totalSeconds = 0;
 timerContainer.innerHTML = totalSeconds;
 let isFirstClick= true;
 const starsContainer = document.querySelector(".stars");
 const star = `<li><i class="fa fa-star"></i></li>`;
 starsContainer.innerHTML = star + star + star;
 rateContainer = document.querySelector('#total_rate');
-message = document.querySelector('.modal-container');
-
 
 
 const iconsList = ["fa fa-diamond", "fa fa-bolt",
@@ -68,8 +66,6 @@ function shuffle(array) {
 
    return array;
 }
-
-
 
 
 // click card event
@@ -158,14 +154,11 @@ function addMove (){
 
 
  // Game over Message
- function gameOver() {
+function gameOver() {
     if(moves >= 40) {
         alert ('Game Over');
-        
-        //stop the time
         resetGame();
-        init();
-   }
+    }
 }
 
 
@@ -180,7 +173,7 @@ function modal() {
 function gameWon() {
 
     if(matchedCards.length == iconsList.length) {
-        clearInterval(incrementer);
+        clearInterval(liveTimer);
         modal();
   
         let modalMoves = document.querySelector('.modal-moves');
@@ -204,6 +197,7 @@ function gameWon() {
 /*
 * Rating
 */
+
 
 function rating() {
 
@@ -251,10 +245,9 @@ function calculateTime(totalSeconds) {
    seconds = totalTime % 60;
 }
 
-    // Timer [Stop].
 function stopTimer() {
-        clearInterval(incrementer);
-    }
+   clearInterval(incrementer);
+}
 
 
 
@@ -265,31 +258,25 @@ function stopTimer() {
 */
 
 restartBtn.addEventListener("click", function(){
-    resetGame ();
-    
-    init();
+   resetGame ();
+   init();
 
 })
 
-
-
-
-
 function  resetGame(){
 
-    cardsContainer.innerHTML = '';
+    cards.Container.innerHTML = '';
     matchedCards = [];
     moves = 0;
     openedCards = [];
     movesContainer.innerHTML = moves;
     starsContainer.innerHTML =  star + star + star;
     totalSeconds = 0;
-    timerContainer.innerHTML = totalSeconds;
+    timerContainers.innerHTML = totalSeconds;
     stopTimer();
-    isfirstClick = true;
-    
+     firstClick = true;
+  
+
 }
-
-
 
 init();

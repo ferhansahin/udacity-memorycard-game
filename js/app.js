@@ -13,13 +13,15 @@ rateHTML = '';
 const movesContainer = document.querySelector(".moves");
 movesContainer.innerHTML = 0;
 const timerContainer = document.querySelector(".timer")
-let liveTimer, totalSeconds = 0;
+let incrementer, totalSeconds = 0;
 timerContainer.innerHTML = totalSeconds;
 let isFirstClick= true;
 const starsContainer = document.querySelector(".stars");
 const star = `<li><i class="fa fa-star"></i></li>`;
 starsContainer.innerHTML = star + star + star;
 rateContainer = document.querySelector('#total_rate');
+message = document.querySelector('.modal-container');
+
 
 
 const iconsList = ["fa fa-diamond", "fa fa-bolt",
@@ -66,6 +68,12 @@ function shuffle(array) {
 
    return array;
 }
+
+// Start game
+function start() {
+    init();
+    click();
+  }
 
 
 // click card event
@@ -154,11 +162,12 @@ function addMove (){
 
 
  // Game over Message
-function gameOver() {
+ function gameOver() {
     if(moves >= 40) {
         alert ('Game Over');
-        resetGame();
-    }
+        restart();
+
+   }
 }
 
 
@@ -173,7 +182,7 @@ function modal() {
 function gameWon() {
 
     if(matchedCards.length == iconsList.length) {
-        clearInterval(liveTimer);
+        clearInterval(incrementer);
         modal();
   
         let modalMoves = document.querySelector('.modal-moves');
@@ -197,7 +206,6 @@ function gameWon() {
 /*
 * Rating
 */
-
 
 function rating() {
 
@@ -246,9 +254,8 @@ function calculateTime(totalSeconds) {
 }
 
     // Timer [Stop].
-    
-    function stopTimer() {
-        clearInterval(liveTimer);
+function stopTimer() {
+        clearInterval(incrementer);
     }
 
 
@@ -259,16 +266,18 @@ function calculateTime(totalSeconds) {
 * restart button
 */
 
-restartBtn.addEventListener("click", function(){
-   resetGame ();
-   init();
- 
+// Play again buttons
+restartBtn.addEventListener('click', function() {
+    restart();
+  });
 
-})
+
+
+
 
 function  resetGame(){
 
-    cardsContainer.innerHTML = '';
+    
     matchedCards = [];
     moves = 0;
     openedCards = [];
@@ -279,9 +288,20 @@ function  resetGame(){
     stopTimer();
     isfirstClick = true;
     
-    
-  
-
 }
 
-init();
+// Restart function
+function restart() {
+
+    // Remove all cards
+   cardsContainer.innerHTML = '';
+  
+    // Reset Current Values
+    resetGame();
+  
+    // Start the game again
+    start();
+  }
+
+
+start();

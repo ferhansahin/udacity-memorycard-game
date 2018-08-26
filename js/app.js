@@ -44,6 +44,7 @@ function init() {
        card.classList.add("card");
        card.innerHTML = "<i class=" + "'fa " + icons[i] + "'></i>";
        cardsContainer.appendChild(card);
+       
        click(card);
 
 }
@@ -134,8 +135,8 @@ function compare(currentCard, previousCard) {
 
    //add new moves
    addMove();
-   isOver();
-   wonTheGame();
+   gameOver();
+   gameWon();
 }
 
 /*
@@ -152,53 +153,43 @@ function addMove (){
 }
 
 
-// Check if game is over
-function isOver() {
-    if (iconsList.length === matchedCards.length) {
-      wonTheGame();
+ // Game over Message
+function gameOver() {
+    if(moves >= 40) {
+        alert ('Game Over');
+        resetGame();
     }
-  }
+}
 
 
-    // Display Modal if player won!.
+// Display Modal if player won!.
+function modal() {
+    const modal = document.getElementById('endGame');
+    modal.classList.add('appear');
     
-    function modal() {
-        const modal = document.getElementById('modal');
-        modal.classList.add('show');
+}
+
+// Gamewon function handle winning process if play won!.
+function gameWon() {
+
+    if(matchedCards.length == iconsList.length) {
+        clearInterval(liveTimer);
+        modal();
+  
+        let modalMoves = document.querySelector('.modal-moves');
+        modalMoves.innerHTML = `Moves : ${moves}`;
+        const time = document.querySelector('.modal-time');
+        time.innerHTML = `Total Seconds : ${totalSeconds}`;
+        const playAgain = document.querySelector('.button');
+        playAgain.addEventListener('click', function() {
+
+      
+
+        const modal = document.getElementById('endGame');
+        modal.classList.remove('appear');
         
-    }
-
-
-
-// Display message when game is over
-function wonTheGame() {
-
-    stopTimer();
-  
-    // Display the message
-    message.style.top = '0';
-  
-    // Add moves to message
-    const totalMoves = document.querySelector('#total_moves');
-    totalMoves.innerHTML = moves + 1; // + 1 is a workaround because somehow moves returns the count -1
-  
-    // Add rating
-    rateContainer.innerHTML = rateHTML;
-  
-    // Add time to message
-    // const totalHours = document.querySelector('#totalHours');
-    const totalMinutes = document.querySelector('#total_minutes');
-    const totalSeconds = document.querySelector('#total_seconds');
-    // totalHours.innerHTML = hours;
-    totalMinutes.innerHTML = minutes;
-    totalSeconds.innerHTML = seconds;
-
-    reset();
-    init();
-
-  
-  }
-
+    }); 
+    }}
 
 
 
@@ -214,22 +205,22 @@ function rating() {
        starsContainer.innerHTML = star + star + star;
    } else if( moves < 20) {
        starsContainer.innerHTML = star + star;
-   } else if (moves < 30 ) {
+   } else if (moves < 35 ) {
        starsContainer.innerHTML = star;
 
    } else {
 
-       isOver();
+       gameOver();
 
    }
        
 }
 
 
+
 /*
 * timer 
 */
-
 function startTimer() {
 
    // Start Incrementer
@@ -243,11 +234,10 @@ function startTimer() {
    
 
        // Change the current time values
-       
-
-   }, 1000);
-  
+   }, 1000); 
 }
+
+
 
 function calculateTime(totalSeconds) {
    hours   = Math.floor( totalSeconds / 60 / 60);
@@ -261,10 +251,11 @@ function stopTimer() {
 
 
 
+
+
 /*
 * restart button
 */
-
 
 restartBtn.addEventListener("click", function(){
    resetGame ();
@@ -273,16 +264,18 @@ restartBtn.addEventListener("click", function(){
 })
 
 function  resetGame(){
-   openedCards = []
-   matchedCards = [];
-   moves=0;
-   movesContainer.innerHTML = moves;
-   starsContainer.innerHTML =  star + star + star;
-   totalSeconds = 0;
-   timerContainer.innerHTML = totalSeconds;
-   cardsContainer.innerHTML = '';
-   firstClick = true;
-   stopTimer();
+
+    cards.Container.innerHTML = '';
+    matchedCards = [];
+    moves = 0;
+    openedCards = [];
+    movesContainer.innerHTML = moves;
+    starsContainer.innerHTML =  star + star + star;
+    totalSeconds = 0;
+    timerContainers.innerHTML = totalSeconds;
+    stopTimer();
+     firstClick = true;
+  
 
 }
 

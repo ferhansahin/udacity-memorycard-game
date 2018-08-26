@@ -114,57 +114,37 @@ h1 {
 
 }
 
-.timer {
-  
-    width: 50%;
-    margin-bottom: 1rem;
-    text-align: center;
+.modal-container {
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0,0,0,.5);
+	position: fixed;
+	top: 0px;
+	z-index: 2000;
+	display: none;
+	justify-content: center;
+	align-items: center;
 }
 
+
+.modal-container.appear {
+	
+	display: flex;
+}
+
+
 .modal {
-    position: absolute;
-    top: -150%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    z-index: 99;
-    transition: all 300ms ease;
-  }
-  
-  .modal.message {
-    width: 50%;
-    margin: 10% auto;
-    padding: 2em;
-    text-align: center;
-    background: #fffc;
-    box-shadow: 0px 0px 4px 1px #d4d4d4b3;
-  }
-  
-  .mmodal .message h2 {
-    font-size: 2.5em;
-    margin-bottom: 0.5em;
-  }
-  
-  .mmodal .message p {
-    font-size: 1.4em;
-    margin-bottom: 0.5em;
-  }
-  
-  .modal .message button {
-    margin-top: 1.5em;
-    padding: 0.5em 3em;
-    font-size: 1.1em;
-    border: 0;
-    background: #fff;
-    box-shadow: 1px 1px 5px 0px #ccc;
-    cursor: pointer;
-    transition: all 300ms ease;
-  }
-  
-  .modal .message button:hover {
-    box-shadow: none;
-  }
+    background: #ffffff ;
+    color: black;
+	width: 40%;
+	min-width: 300px;
+	padding: 40px;
+	border: 10px solid black;
+	box-shadow: 0 0 0 10px white;
+	position: relative;
+	text-align: center;
+}
+
   
   
 /*

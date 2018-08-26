@@ -182,8 +182,7 @@ function gameWon() {
         time.innerHTML = `Total Seconds : ${totalSeconds}`;
         const playAgain = document.querySelector('.button');
         playAgain.addEventListener('click', function() {
-
-      
+        resetGame();
 
         const modal = document.getElementById('endGame');
         modal.classList.remove('appear');
@@ -224,7 +223,7 @@ function rating() {
 function startTimer() {
 
    // Start Incrementer
-   incrementer = setInterval(function() {
+   liveTimer = setInterval(function() {
 
        // Add totalTime by 1
        totalSeconds += 1;
@@ -246,7 +245,7 @@ function calculateTime(totalSeconds) {
 }
 
 function stopTimer() {
-   clearInterval(incrementer);
+   clearInterval(liveTimer);
 }
 
 
@@ -259,23 +258,22 @@ function stopTimer() {
 
 restartBtn.addEventListener("click", function(){
    resetGame ();
-   init();
 
 })
 
 function  resetGame(){
 
-    cards.Container.innerHTML = '';
+    cardsContainer.innerHTML = '';
     matchedCards = [];
     moves = 0;
     openedCards = [];
     movesContainer.innerHTML = moves;
     starsContainer.innerHTML =  star + star + star;
     totalSeconds = 0;
-    timerContainers.innerHTML = totalSeconds;
+    timerContainer.innerHTML = totalSeconds;
     stopTimer();
      firstClick = true;
-  
+     init();
 
 }
 

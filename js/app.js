@@ -1,7 +1,14 @@
 /*
  * Create a list that holds all of your cards
  */
-const icons = ["fa fa-diamond", "fa fa-bolt",
+
+let   openedCards = [],
+      matchedCards = [];
+      
+    
+
+
+const iconsList = ["fa fa-diamond", "fa fa-bolt",
     "fa fa-paper-plane-o", "fa fa-cube",
     "fa fa-anchor", "fa fa-anchor",
     "fa fa-bolt", "fa fa-leaf",
@@ -10,15 +17,17 @@ const icons = ["fa fa-diamond", "fa fa-bolt",
     "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb",
 ];
 
-const cardsContainer = document.querySelector(".deck");
 
-let openedCards = [];
-let matchedCards = [];
+
+
+const cardsContainer = document.querySelector(".deck");    
+
 
 // create the cards
 function init() {
 
 
+        const icons = shuffle(iconsList);
     
 
         for (let i = 0; i < icons.length; i++) {
@@ -28,6 +37,8 @@ function init() {
         card.innerHTML = "<i class=" + "'fa " + icons[i] + "'></i>";
         cardsContainer.appendChild(card);
 
+
+
         click(card);
     
 
@@ -36,8 +47,17 @@ function init() {
 
 }
 
+
+let isFirstClick= false;
 // click card event
 function click(card) {
+
+    if(isFirstClick){
+        
+        startTimer();
+
+        isFirstClick = false;
+    }
 
 
     card.addEventListener('click', function() {
@@ -57,8 +77,10 @@ function click(card) {
             //we should compare our two cards
             compare(currentCard, previousCard);
 
-            // we don't have any opened cards
+            
         } else {
+            
+            // we don't have any opened cards
 
             card.classList.add("open", "show", "disable");
             openedCards.push(this);
@@ -111,16 +133,12 @@ function compare(currentCard, previousCard) {
 }
 
 
-function isOver() {
-    if (matchedCards.length === icons.length) {
-        alert('game over');
-    }
-}
+
+
 
 /*
 * add Moves
 */
-
 
 const movesContainer = document.querySelector(".moves");
 movesContainer.innerHTML = 0;
@@ -133,27 +151,80 @@ function addMove (){
   rating();
 }
 
+
+
+// Is game over ?
+function isOver() {
+    if (matchedCards.length === iconsList.length || moves >= 30) {
+        // popup when you game over
+        alert('Game Is Over, Try Again?');
+
+        //stop the time
+        resetGame();
+    }
+}
+
 /*
 * Rating
 */
 
 const starsContainer = document.querySelector(".stars");
-starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>' ;
+const star = `<li><i class="fa fa-star"></i></li>`;
+starsContainer.innerHTML = star + star + star;
+function rating() {
 
-function rating(){
-    
-    
-     if (17 < moves < 25){
-         starsContainer.innerHTML = ' <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>' ;
-     } else if ( moves > 25 ){
-        starsContainer.innerHTML = ' <li><i class="fa fa-star"></i></li>';
+    if( moves < 10) {
+        starsContainer.innerHTML = star + star + star;
+    } else if( moves < 15) {
+        starsContainer.innerHTML = star + star;
+    } else if (moves < 25 ) {
+        starsContainer.innerHTML = star;
 
-     } else  {
-        starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>' ;
+    } else {
 
-     }
-     
+        isOver();
 
+    }
+        
+}
+
+
+/*
+ * timer 
+ */
+
+const timerContainer = document.querySelector(".timer")
+let liveTimer, 
+    totalSeconds = 0;
+
+timerContainer.innerHTML = totalSeconds;
+
+function startTimer() {
+
+    // Start Incrementer
+    incrementer = setInterval(function() {
+
+        // Add totalTime by 1
+        totalSeconds += 1;
+
+        // Convert Total Time 
+       timerContainer.innerHTML = totalSeconds;
+
+        // Change the current time values
+        
+
+    }, 1000);
+   
+}
+
+function calculateTime(totalSeconds) {
+    hours   = Math.floor( totalSeconds / 60 / 60);
+    minutes = Math.floor( (totalTime / 60) % 60);
+    seconds = totalTime % 60;
+}
+
+function stopTimer() {
+    clearInterval(liveTimer);
 }
 
 
@@ -176,30 +247,28 @@ restartBtn.addEventListener("click", function(){
     movesContainer.innerHTML = moves;
 
 
+    //reset the game
+    resetGame ();
+
+
 
 })
 
+function  resetGame(){
+
+    matchedCards = [];
+    moves=0;
+    movesContainer.innerHTML = moves;
+    starsContainer.innerHTML =  star + star + star;
+    totalSeconds = 0;
+    timerContainer.innerHTML = totalSeconds;
+    
 
 
-/*
-const restartBtn =  document.querySelector(".restart");
-restartBtn.addEventListener("click", function (){
+ }
 
-     // delete all cards
-     cardsContainer.innerHTML ="";
-
-     //call init to create new cards
-     init();
-
-     // reset any related variables
-     matchedCards = [];
-
-
-})
-*/
 
 init();
-
 
 
 /*
@@ -237,4 +306,6 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+
 
